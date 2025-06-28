@@ -18,7 +18,7 @@ export default function ExpenseList({ expenses }) {
             <ListItem>
               <ListItemText
                 primary={`${exp.category} - $${exp.amount.toFixed(2)}`}
-                secondary={`${exp.date} | ${exp.description}`}
+                secondary={`Vendor: ${exp.vendor || 'N/A'} | ${exp.date} | ${exp.description}`}
               />
             </ListItem>
             {idx < expenses.length - 1 && <Divider />}

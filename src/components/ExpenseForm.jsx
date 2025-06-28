@@ -12,9 +12,19 @@ const categories = [
   'Other',
 ];
 
+const vendors = [
+  'KPN',
+  'Zudio',
+  'Star market',
+  'Dmart',
+  'Swiggy',
+  'Others',
+];
+
 export default function ExpenseForm({ onAddExpense }) {
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState(categories[0]);
+  const [vendor, setVendor] = useState(vendors[0]);
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
 
@@ -24,12 +34,14 @@ export default function ExpenseForm({ onAddExpense }) {
     onAddExpense({
       date: date.toISOString().split('T')[0],
       category,
+      vendor,
       amount: parseFloat(amount),
       description,
     });
     setAmount('');
     setDescription('');
     setCategory(categories[0]);
+    setVendor(vendors[0]);
     setDate(new Date());
   };
 
@@ -47,6 +59,12 @@ export default function ExpenseForm({ onAddExpense }) {
           value={category}
           onChange={(_, newValue) => setCategory(newValue || '')}
           renderInput={(params) => <TextField {...params} label="Category" fullWidth />}
+        />
+        <Autocomplete
+          options={vendors}
+          value={vendor}
+          onChange={(_, newValue) => setVendor(newValue || '')}
+          renderInput={(params) => <TextField {...params} label="Vendor" fullWidth />}
         />
         <TextField
           label="Amount"
